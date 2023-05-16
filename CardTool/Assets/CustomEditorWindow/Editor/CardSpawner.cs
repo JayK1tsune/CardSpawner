@@ -10,7 +10,7 @@ public class CardSpawner : EditorWindow
     private GameObject cardParentSpawner;
     private int cardCount = 1;
     private float cardScale = 1;
-    private string parentName;
+    public string parentName;
 
 
     [MenuItem("Window/Card Spawner")]
@@ -18,6 +18,16 @@ public class CardSpawner : EditorWindow
     {
         GetWindow<CardSpawner>("Card Spawner");
     }
+    
+
+	public void EmptyChild(){
+		GameObject go = new GameObject(parentName);
+		go.transform.parent = Selection.activeTransform;
+		go.transform.localPosition = Vector3.zero;
+		go.transform.localRotation = Quaternion.identity;
+		go.transform.localScale = Vector3.one;
+	}
+
 
    
 
@@ -57,12 +67,15 @@ public class CardSpawner : EditorWindow
             }
         }
         if (GUILayout.Button("Create Parent")){
-            if (cardParentSpawner == null)
-            {
-                Debug.LogError("Card Parent Spawner is null!");
-                return;
+            if (Selection.activeGameObject == null){
+                EmptyChild();
+                cardParentSpawner = Selection.activeGameObject;
             }
-            GameObject cardParent = new GameObject(parentName);
+            else{
+                EmptyChild();
+                cardParent = Selection.activeGameObject;
+                cardParentSpawner = Selection.activeGameObject;
+            }            
         }
 
         if (GUILayout.Button("Clear Cards"))
