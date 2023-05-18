@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468038b31260de544b7a030f8632c7ad, type: 3}
+  m_Name: Test1
+  m_EditorClassIdentifier: 
+  cardName: Fox1
+  FoxFace: {fileID: 21300000, guid: 6eba2c0c64ac33e4e8042c5cb418f4ad, type: 3}
+  Paws: {fileID: 21300000, guid: 4001c3930b743fb408b0af79474917e7, type: 3}
+  background: {fileID: 21300000, guid: 3eb4d3473deaa454e946773a03c3f6ee, type: 3}
+  cost: {fileID: -1251105246, guid: bf4129537b0ca6845a79549e71d72c2b, type: 3}

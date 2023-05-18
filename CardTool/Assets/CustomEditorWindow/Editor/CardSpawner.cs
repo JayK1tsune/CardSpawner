@@ -11,6 +11,7 @@ public class CardSpawner : EditorWindow
     private int cardCount = 1;
     private float cardScale = 1;
     public string parentName;
+    public string cardName;
 
 
     [MenuItem("Window/Card Spawner")]
@@ -19,7 +20,6 @@ public class CardSpawner : EditorWindow
         GetWindow<CardSpawner>("Card Spawner");
     }
     
-
 	public void EmptyChild(){
 		GameObject go = new GameObject(parentName);
 		go.transform.parent = Selection.activeTransform;
@@ -28,22 +28,19 @@ public class CardSpawner : EditorWindow
 		go.transform.localScale = Vector3.one;
 	}
 
-
-   
-
     private void OnGUI()
     {
+        
+
         GUILayout.Label("Card Spawner", EditorStyles.boldLabel);
 
         cardPrefab = (GameObject)EditorGUILayout.ObjectField("Card Prefab", cardPrefab, typeof(GameObject), false);
+        cardName = EditorGUILayout.TextField("Card Name", cardName);
+        GUILayout.Space(20);
         cardParent = (GameObject)EditorGUILayout.ObjectField("Card Parent", cardParent, typeof(GameObject), true);
         cardCount = EditorGUILayout.IntField("Card Count", cardCount);
         cardScale = EditorGUILayout.Slider("Size of Card", cardScale, 0.5f,5f); 
-        parentName = EditorGUILayout.TextField("Parent Gameobject", parentName);
-        
-        
-        
-        
+        parentName = EditorGUILayout.TextField("Parent Name", parentName);
 
         if (GUILayout.Button("Spawn Cards"))
         {
@@ -63,7 +60,7 @@ public class CardSpawner : EditorWindow
             {
                 GameObject card = Instantiate(cardPrefab,cardParent.transform);
                 card.transform.localScale = new Vector3(cardScale, cardScale, cardScale);
-                card.name = "Card " + (i + 1);
+                card.name = cardName;
             }
         }
         if (GUILayout.Button("Create Parent")){
@@ -103,6 +100,5 @@ public class CardSpawner : EditorWindow
                 DestroyImmediate(cardParentSpawner.transform.GetChild(i).gameObject);
             }
         }
-        
-    }
+    }   
 }
