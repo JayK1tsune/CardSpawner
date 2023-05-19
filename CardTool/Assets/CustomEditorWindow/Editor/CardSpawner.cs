@@ -13,6 +13,8 @@ public class CardSpawner : EditorWindow
     public string parentName;
     public string cardName;
 
+    public CardAttributes cardAttributes;
+    
 
     [MenuItem("Window/Card Spawner")]
     public static void ShowWindow()
@@ -30,20 +32,37 @@ public class CardSpawner : EditorWindow
 
     private void OnGUI()
     {
+        cardAttributes = (CardAttributes)EditorGUILayout.ObjectField("Card Attributes", cardAttributes, typeof(CardAttributes), false);
+        if (GUILayout.Button("Modify Card Attributes"))
+            {
+                ModifyCardAttributesWindow.Open(cardAttributes);
+            }
+
         
-
-        GUILayout.Label("Card Spawner", EditorStyles.boldLabel);
-
+        GUILayout.Label("Place Prefab of card here:", EditorStyles.boldLabel);
+        GUILayout.Space(5);
         cardPrefab = (GameObject)EditorGUILayout.ObjectField("Card Prefab", cardPrefab, typeof(GameObject), false);
         cardName = EditorGUILayout.TextField("Card Name", cardName);
-        GUILayout.Space(20);
+        GUILayout.Space(10);
+        GUILayout.Label("Place Gameobject you wish to spawn cards into here: " + parentName, EditorStyles.boldLabel);
         cardParent = (GameObject)EditorGUILayout.ObjectField("Card Parent", cardParent, typeof(GameObject), true);
+        GUILayout.Space(10);
+        GUILayout.Label("Amount of cards to spawn: " + cardCount, EditorStyles.boldLabel);
         cardCount = EditorGUILayout.IntField("Card Count", cardCount);
+        GUILayout.Space(10);
         cardScale = EditorGUILayout.Slider("Size of Card", cardScale, 0.5f,5f); 
+        GUILayout.Space(20);
+        GUILayout.Label("You can use this to create a new Parent for your cards here: ", EditorStyles.boldLabel);
         parentName = EditorGUILayout.TextField("Parent Name", parentName);
 
         if (GUILayout.Button("Spawn Cards"))
         {
+            if (cardAttributes != null)
+            {
+                cardAttributes.cardName = cardName;
+                EditorUtility.SetDirty(cardAttributes);
+            }
+
             if (cardPrefab == null)
             {
                 Debug.LogError("Card Prefab is null!");
