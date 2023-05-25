@@ -1,0 +1,14 @@
+{
+    "name": "com.jasonforrest.cardtool",
+    "version": "1.0.0",
+    "displayName": "Card Tool",
+    "description": "",
+    "unity": "2019.1",
+    "dependencies": {
+   },
+    "author": {
+      "name": "jasonforrest",
+      "email": "s4012013@glos.ac.uk",
+      "url": "JayK1tsune.github.io"
+    }
+  }
